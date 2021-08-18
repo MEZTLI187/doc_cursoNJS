@@ -1,0 +1,11 @@
+{
+  "name": "doc_cursonjs",
+  "version": "1.0.0",
+  "description": "Proyecto del curso de NJS-2021Agosto",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Meztli Valeriano Orozco",
+  "license": "ISC"
+}
