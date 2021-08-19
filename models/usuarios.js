@@ -19,3 +19,5 @@ const usuariosQueries = {
             status = 1
     `,
 };
+
+module.exports = usuariosQueries;

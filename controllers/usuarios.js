@@ -1,7 +1,25 @@
 const { request, response } = require("express");
+const pool = require("../db/conexion");
+const usuariosQueries = require("../models/usuarios");
 
-const usuariosGet = (req = request, res = response) => {
-  res.json({ msg: "Hola a todos desde GET" });
+const usuariosGet = async (req = request, res = response) => {
+  let conn;
+
+  try {
+    conn = await pool.getConnection();
+
+    const usuarios = await conn.query(usuariosQueries.selectUsuarios);
+
+    res.json({usuarios});
+  } catch(error){
+      console.log(error);
+      res.status(500).json({msg:"Por favor contacte al administrador",error});
+    } finally{
+      if (conn) conn.end();
+    }
+ 
+  
+  //res.json({ msg: "Hola a todos desde GET" });
 };
 
 const usuariosPost = (req = request, res = response) => {
