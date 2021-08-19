@@ -10,7 +10,19 @@ class Server{
     }
     routes(){
         this.app.get('/',function(req,res) {
-            res.send('Hola Lunita-con DotEnv & Clase Server');
+            res.json({msg:'Hola Lunita desde GET'});
+        });
+
+        this.app.post('/',function(req,res) {
+            res.json({msg:'Hola Lunita desde POST'});
+        });
+
+        this.app.put('/',function(req,res) {
+            res.json({msg:'Hola Lunita desde PUT'});
+        });
+
+        this.app.delete('/',function(req,res) {
+            res.json({msg:'Hola Lunita desde DELETE'});
         });
     }
 
