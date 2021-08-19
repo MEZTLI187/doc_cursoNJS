@@ -14,15 +14,15 @@ class Server{
         });
 
         this.app.post('/',function(req,res) {
-            res.json({msg:'Hola Lunita desde POST'});
+            res.status(201).json({msg:'Hola Lunita desde POST'});
         });
 
         this.app.put('/',function(req,res) {
-            res.json({msg:'Hola Lunita desde PUT'});
+            res.status(400).json({msg:'Hola Lunita desde PUT'});
         });
 
         this.app.delete('/',function(req,res) {
-            res.json({msg:'Hola Lunita desde DELETE'});
+            res.status(500).json({msg:'Hola Lunita desde DELETE'});
         });
     }
 
