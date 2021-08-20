@@ -45,22 +45,21 @@ const usuariosPost = async (req = request, res = response) => {
     res
       .status(500)
       .json({msg:"Por favor contacte con su administrador",error});
-  } finally{
+  } finally{ 
     if (conn) conn.end();
   }
 };
 
 const usuariosPut = async (req = request, res = response) => {
-  const{email} = req.query;
-  const{nombre, status} = req.body;
-
+  const {email} = req.query;
+  const {nombre, status} = req.body;
 
   let conn;
 
   try {
     conn = await pool.getConnection();
 
-    const usuarios= await conn.query(usuariosQueries.updateUsuario,[
+    const usuarios= await conn.query(usuariosQueries.updateUsuario, [
       nombre,
       status,
       email

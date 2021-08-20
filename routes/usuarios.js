@@ -13,7 +13,7 @@ const router = Router();
 // para poder verlos localhost:3001/usuarios
 router.get("/", usuariosGet);
 router.post("/", usuariosPost);
-router.put("/:id", usuariosPut);
+router.put("/", usuariosPut);
 router.delete("/", usuariosDelete);
 
 
