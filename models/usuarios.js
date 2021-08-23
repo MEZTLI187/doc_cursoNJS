@@ -29,6 +29,16 @@ const usuariosQueries = {
         WHERE
             email=?
     `,
+    updatePassword:`
+        UPDATE
+            usuarios
+        SET
+            password=?
+        WHERE
+            email=?
+        AND
+            status=1
+    `,
     deleteUsuario:`
         UPDATE 
             usuarios

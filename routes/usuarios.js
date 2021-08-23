@@ -5,6 +5,7 @@ const {
     usuariosPut,
     usuariosDelete,
     usuarioSignin,
+    usuarioUpdatePassword,
   } = require("../controllers/usuarios");
 
 
@@ -17,6 +18,7 @@ router.post("/", usuariosPost);
 router.put("/", usuariosPut);
 router.delete("/", usuariosDelete);
 router.post("/signin/", usuarioSignin);
+router.put("/UpdatePassword/", usuarioUpdatePassword);
 
 
 module.exports = router;

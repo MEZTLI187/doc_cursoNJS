@@ -151,4 +151,53 @@ const usuarioSignin = async (req = request, res = response) => {
   }
 }
 
-module.exports = { usuariosGet, usuariosPost, usuariosPut, usuariosDelete, usuarioSignin };
+//TAREA-ACTUALIZACION DE CONTRASENA
+const usuarioUpdatePassword = async (req = request, res = response) => {
+  const {email} = req.query;
+  const {oldPassword, newPassword, status} = req.body;
+
+  let conn;
+
+  try {
+    conn = await pool.getConnection();
+    const salt = bcryptjs.genSaltSync();
+    
+    //Verifica la existencia del email
+    const usuarios = await conn.query(usuariosQueries.getusuarioByEmail,[email]);
+    
+    if(!usuarios){
+      res.status(404).json({msg:`No se encontro el usuario ${email}.`});
+      return;
+    }
+    
+    const passwordValido = bcryptjs.compareSync(oldPassword, usuarios[0].password);
+    const statusActual = parseInt(usuarios[0].status);
+    const newPasswordHash = bcryptjs.hashSync(newPassword, salt);
+    
+    if(passwordValido && statusActual===1){
+      const cambio = await conn.query(usuariosQueries.updatePassword, [
+        newPassword,
+        email,
+        statusActual,
+      ]);
+      
+    } else{
+      res.status(401).json({msg:"El password no coincide"});
+      return;
+    }
+
+    res.json({msg:"Cambio de contraseña exitoso"});
+
+  } catch (error) {
+    console.log(error);
+    res
+      .status(500)
+      .json({msg:"Por favor contacte con su administrador",error});
+  } finally{
+    if (conn) conn.end();
+  }
+
+};
+
+
+module.exports = { usuariosGet, usuariosPost, usuariosPut, usuariosDelete, usuarioSignin, usuarioUpdatePassword };
